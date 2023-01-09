@@ -83,7 +83,7 @@ class App():
 
     # Local das metas XLSX
     def localMetas(self):
-        os.system('explorer metas')
+        system('explorer metas')
 
     # Logout !
     def logout(self):
@@ -105,6 +105,7 @@ class App():
 
         # Tentativa de Login
         l.tryLogin()
+        
         r = l.resposta   
         if r == 'sim':
             self.msg(self.winLogin, 'Sucesso')
