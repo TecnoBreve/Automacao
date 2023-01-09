@@ -8,6 +8,6 @@ Front End: PyQt5. <br><br>
 Para realizar o Login entre em contato com o suporte:<br>
 📱 (43) 9 9661-7904
 
-<image src='https://github.com/TecnoBreve/Automacao/blob/main/img/man.png'></image>
+<image src='https://github.com/TecnoBreve/Automacao/blob/main/img/pscreen.jpeg'></image>
 
-<p>Desenvolvido por TecnoBreve 2023 ₢</p>
+<p>₢ Desenvolvido por TecnoBreve 2023 ₢</p>
