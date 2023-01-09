@@ -2,6 +2,7 @@
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMessageBox as Qmsg
 from os import system
+from sys import exit
 from qdarktheme import setup_theme as st
 
 # Importação de modulos próprios
@@ -107,12 +108,18 @@ class App():
         l.matriculaL = str(self.user)
         l.senhaL = str(self.pasw)
 
+        # Teste de Rede
+        r = l.resposta
+        if r == 'net':
+            self.msg(self.winLogin, 'Sem conexão com a Internet')
+            exit()
+
         # Tentativa de Login
         l.tryLogin()
         r = l.resposta   
         if r == 'sim':
-            self.msg(self.winLogin, 'Sucesso')
             self.nome = l.nome
+            self.msg(self.winLogin, f'Seja bem vindo {self.nome}')
             self.mainWin.lblUser.setText(f'{self.nome}')
             self.winLogin.close()
             self.mainWin.show()
@@ -120,7 +127,6 @@ class App():
             self.msg(self.winLogin, 'Senha Incorreta !!')
         elif r == 'user':
             self.msg(self.winLogin, 'Usuário não encontrado !!')
-        else:
-            self.msg(self.winLogin, 'Sem conexão com a Internet')     
-
-App() # Executa a classe 
+        else:     
+            self.msg(self.winLogin, 'Erro desconhecido !')
+App()
