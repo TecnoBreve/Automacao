@@ -1,8 +1,10 @@
+# Importação de config.
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMessageBox as Qmsg
-from sqlite3 import connect as con 
-import os, qdarktheme
+from os import system
+from qdarktheme import setup_theme as st
 
+# Importação de modulos próprios
 from metas import Metas
 from hxh import mainHxh
 from pa import PA
@@ -14,7 +16,7 @@ from login import Login
 
 class App():
     def __init__(self):
-        # VAR Metas
+        # Variavel de Metas
         self.m = Metas
         self.m.fl = 'L062'
         self.m()
@@ -22,12 +24,12 @@ class App():
 
         # Settings
         self.app = QApplication([])
-        self.winLogin = uic.loadUi('uic\\login.ui')
-        self.mainWin = uic.loadUi('uic\\main.ui')
-        self.mainWin.metaLbl.setText(f'Meta: R${self.metaLbl:.2f}')
-        qdarktheme.setup_theme()
+        self.winLogin = uic.loadUi('uic\\login.ui') # Exporta o design da Login windown 
+        self.mainWin = uic.loadUi('uic\\main.ui') # Exporta o design da Main windown
 
-        # Callback
+        st() # Setar tema escuro
+
+        # Callback dos Buttons
         self.mainWin.btnhxh.clicked.connect(self.hxh)
         self.mainWin.btnestore.clicked.connect(self.estore)
         self.mainWin.paBtn.clicked.connect(self.pa)
@@ -36,10 +38,13 @@ class App():
         self.mainWin.metaBtn.clicked.connect(self.localMetas)
         self.mainWin.atualizarEstore.clicked.connect(self.atuEs)
         self.winLogin.btnLogin.clicked.connect(self.entrar)
+        self.mainWin.metaLbl.setText(f'Meta: R${self.metaLbl:.2f}') # Setar o texto com a meta dia
+
+        #  Executando a Tela de Login
         self.winLogin.show()
         self.app.exec()
 
-    # Mensagem
+    # MessageBox 
     def msg(self, win, msg):
         self.tt = 'LOGIN'
         Qmsg.about(win, self.tt, msg)
@@ -53,7 +58,7 @@ class App():
     
     # E-Store
     def estore(self):
-        os.system('cd pln && estore.xlsx')
+        system('cd pln && estore.xlsx')
         es().iniciar()
 
     # Participação
@@ -89,11 +94,16 @@ class App():
 
     # Login !
     def entrar(self):
-        user = self.winLogin.mat.text()
+        # Pega valores do campo de texto
+        user = self.winLogin.mat.text() 
         pasw = self.winLogin.pas.text()
+
+        # Config. do módulo de Login
         l = Login()
         l.matriculaL = str(user)
         l.senhaL = str(pasw)
+
+        # Tentativa de Login
         l.tryLogin()
         r = l.resposta   
         if r == 'sim':
@@ -108,4 +118,5 @@ class App():
             self.msg(self.winLogin, 'Usuário não encontrado !!')
         else:
             self.msg(self.winLogin, 'Erro Inesperado')     
-App()
+
+App() # Executa a classe 
