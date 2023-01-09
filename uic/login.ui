@@ -28,10 +28,7 @@
 color: white;</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout" stretch="0">
-    <property name="spacing">
-     <number>10</number>
-    </property>
+   <layout class="QGridLayout" name="gridLayout">
     <property name="leftMargin">
      <number>10</number>
     </property>
@@ -44,7 +41,7 @@ color: white;</string>
     <property name="bottomMargin">
      <number>10</number>
     </property>
-    <item>
+    <item row="0" column="0">
      <widget class="QFrame" name="frameLogin">
       <property name="maximumSize">
        <size>
@@ -71,7 +68,7 @@ color: white;</string>
        <property name="geometry">
         <rect>
          <x>30</x>
-         <y>230</y>
+         <y>200</y>
          <width>211</width>
          <height>31</height>
         </rect>
@@ -104,7 +101,7 @@ border-radius: 15px;</string>
        <property name="geometry">
         <rect>
          <x>30</x>
-         <y>270</y>
+         <y>240</y>
          <width>211</width>
          <height>31</height>
         </rect>
@@ -117,7 +114,7 @@ border-radius: 15px;</string>
         </font>
        </property>
        <property name="focusPolicy">
-        <enum>Qt::TabFocus</enum>
+        <enum>Qt::StrongFocus</enum>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(51, 51, 51);
@@ -140,8 +137,8 @@ color: ghostwhite;</string>
        <property name="geometry">
         <rect>
          <x>40</x>
-         <y>320</y>
-         <width>191</width>
+         <y>350</y>
+         <width>190</width>
          <height>51</height>
         </rect>
        </property>
@@ -184,38 +181,133 @@ border-radius: 15px;</string>
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QLabel" name="label_2">
+      <widget class="QRadioButton" name="salvarUser">
        <property name="geometry">
         <rect>
-         <x>0</x>
-         <y>140</y>
-         <width>271</width>
-         <height>41</height>
+         <x>60</x>
+         <y>290</y>
+         <width>181</width>
+         <height>31</height>
         </rect>
        </property>
        <property name="font">
         <font>
-         <family>Segoe MDL2 Assets</family>
-         <pointsize>18</pointsize>
+         <family>MS UI Gothic</family>
+         <pointsize>13</pointsize>
          <weight>75</weight>
          <bold>true</bold>
-         <stylestrategy>PreferDefault</stylestrategy>
         </font>
        </property>
-       <property name="text">
-        <string>Automação Login</string>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
        </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
+       <property name="mouseTracking">
+        <bool>false</bool>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: #333;</string>
+       </property>
+       <property name="text">
+        <string>Salvar Usuário</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../img/slvUser.png</normaloff>../img/slvUser.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+       <property name="shortcut">
+        <string>Ctrl+S</string>
+       </property>
+       <property name="checked">
+        <bool>false</bool>
        </property>
       </widget>
+      <widget class="QPushButton" name="pushButton">
+       <property name="geometry">
+        <rect>
+         <x>4</x>
+         <y>140</y>
+         <width>271</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <family>MS Shell Dlg 2</family>
+         <pointsize>15</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: #333;
+color: white;
+border: 0px;
+</string>
+       </property>
+       <property name="text">
+        <string>Login Automação</string>
+       </property>
+       <property name="icon">
+        <iconset>
+         <normaloff>../img/people.png</normaloff>../img/people.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="label_2">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>15</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>MS UI Gothic</family>
+        <pointsize>9</pointsize>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Desenvolvido por TecnoBreve 2023 ©</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
+      <property name="margin">
+       <number>0</number>
+      </property>
      </widget>
     </item>
    </layout>
   </widget>
  </widget>
- <resources>
-  <include location="scr.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
