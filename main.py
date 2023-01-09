@@ -38,6 +38,7 @@ class App():
         self.mainWin.metaBtn.clicked.connect(self.localMetas)
         self.mainWin.atualizarEstore.clicked.connect(self.atuEs)
         self.winLogin.btnLogin.clicked.connect(self.entrar)
+        self.slvBtn = self.winLogin.salvarUser
         self.mainWin.metaLbl.setText(f'Meta: R${self.metaLbl:.2f}') # Setar o texto com a meta dia
 
         #  Executando a Tela de Login
@@ -49,17 +50,17 @@ class App():
         self.tt = 'LOGIN'
         Qmsg.about(win, self.tt, msg)
 
+    # E-Store
+    def estore(self):
+        system('cd pln && estore.xlsx')
+        es().iniciar()
+
     # Hora X Hora
     def hxh(self):
         with open('txt\\texto.txt', 'w') as doc:
             text = self.mainWin.entex.toPlainText()
             doc.write(text)
         mainHxh()
-    
-    # E-Store
-    def estore(self):
-        system('cd pln && estore.xlsx')
-        es().iniciar()
 
     # Participação
     def pa(self):
@@ -75,37 +76,39 @@ class App():
             doc.write(text)
         VJ().code()
     
-    # Atualizar Estore
+    # Puxa 1% das metas do .XLSX 
     def atuEs(self):
         self.msg(self.winLogin, 'Atualizando...')
         init()
         self.msg(self.winLogin, 'Metas de Estore Atualizada!!!')
 
-    # Local das metas XLSX
+    # Local das metas .XLSX
     def localMetas(self):
         system('explorer metas')
 
     # Logout !
     def logout(self):
+        if self.slvBtn.isChecked():
+            self.winLogin.mat.setText(self.user)
+        else:
+            self.winLogin.mat.setText('')
         self.winLogin.pas.setText('')
-        self.winLogin.mat.setText('')
         self.mainWin.close()
         self.winLogin.show()
 
-    # Login !
+    # Realiza o Login
     def entrar(self):
         # Pega valores do campo de texto
-        user = self.winLogin.mat.text() 
-        pasw = self.winLogin.pas.text()
+        self.user = self.winLogin.mat.text() 
+        self.pasw = self.winLogin.pas.text()
 
         # Config. do módulo de Login
         l = Login()
-        l.matriculaL = str(user)
-        l.senhaL = str(pasw)
+        l.matriculaL = str(self.user)
+        l.senhaL = str(self.pasw)
 
         # Tentativa de Login
         l.tryLogin()
-        
         r = l.resposta   
         if r == 'sim':
             self.msg(self.winLogin, 'Sucesso')
@@ -118,6 +121,6 @@ class App():
         elif r == 'user':
             self.msg(self.winLogin, 'Usuário não encontrado !!')
         else:
-            self.msg(self.winLogin, 'Erro Inesperado')     
+            self.msg(self.winLogin, 'Sem conexão com a Internet')     
 
 App() # Executa a classe 
