@@ -105,8 +105,8 @@ class App():
 
         # Config. do módulo de Login
         l = Login()
-        l.matriculaL = str(self.user)
-        l.senhaL = str(self.pasw)
+        l.matriculaLogin = str(self.user)
+        l.senhaLogin = str(self.pasw)
 
         # Teste de Rede
         r = l.resposta

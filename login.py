@@ -2,8 +2,8 @@ import requests as rq, json
 
 class Login():
     def __init__(self):
-        self.matriculaL = None
-        self.senhaL = None
+        self.matriculaLogin = None
+        self.senhaLogin = None
         self.resposta = None
         self.nome = None
         self.conn()
@@ -18,10 +18,10 @@ class Login():
 
     def tryLogin(self):
         try:
-            sn = self.dados[self.matriculaL]['senha']
-            if sn == self.senhaL:
+            sn = self.dados[self.matriculaLogin]['senha']
+            if sn == self.senhaLogin:
                 self.resposta = 'sim'
-                self.nome = self.dados[self.matriculaL]['nome']
+                self.nome = self.dados[self.matriculaLogin]['nome']
             else:
                 self.resposta = 'senha'
         except:
