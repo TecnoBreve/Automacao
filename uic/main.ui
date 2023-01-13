@@ -573,7 +573,7 @@ border-radius: 10px;</string>
              <item>
               <layout class="QGridLayout" name="gridLayout">
                <item row="1" column="0">
-                <widget class="QPushButton" name="pushButton_2">
+                <widget class="QPushButton" name="btnEdit">
                  <property name="text">
                   <string>EDITAR</string>
                  </property>
@@ -590,7 +590,7 @@ border-radius: 10px;</string>
                 </widget>
                </item>
                <item row="0" column="0">
-                <widget class="QPushButton" name="pushButton">
+                <widget class="QPushButton" name="btnAdd">
                  <property name="font">
                   <font>
                    <pointsize>-1</pointsize>
@@ -612,7 +612,7 @@ border-radius: 10px;</string>
                 </widget>
                </item>
                <item row="1" column="1">
-                <widget class="QPushButton" name="pushButton_4">
+                <widget class="QPushButton" name="btnAtua">
                  <property name="font">
                   <font>
                    <pointsize>-1</pointsize>
@@ -634,7 +634,7 @@ border-radius: 10px;</string>
                 </widget>
                </item>
                <item row="0" column="1">
-                <widget class="QPushButton" name="pushButton_3">
+                <widget class="QPushButton" name="btnSenha">
                  <property name="font">
                   <font>
                    <pointsize>-1</pointsize>

@@ -4,6 +4,7 @@ from PyQt5.QtWidgets import QApplication, QMessageBox as Qmsg
 from os import system
 from sys import exit
 from qdarktheme import setup_theme as st
+import requests as rq, json
 
 # Importação de modulos próprios
 from metas import Metas
@@ -12,7 +13,6 @@ from pa import PA
 from vj import VJ
 from estore import es
 from atualizarEstore import init
-from login import Login
 
 
 class App():
@@ -35,16 +35,66 @@ class App():
         self.mainWin.btnestore.clicked.connect(self.estore)
         self.mainWin.paBtn.clicked.connect(self.pa)
         self.mainWin.btnvj.clicked.connect(self.vj)
+
         self.mainWin.logout.clicked.connect(self.logout)
+
         self.mainWin.metaBtn.clicked.connect(self.localMetas)
         self.mainWin.atualizarEstore.clicked.connect(self.atuEs)
-        self.winLogin.btnLogin.clicked.connect(self.entrar)
+
+        self.mainWin.btnAdd.clicked.connect(self.addUser)
+        self.mainWin.btnSenha.clicked.connect(self.atuSenha)
+        self.mainWin.btnEdit.clicked.connect(self.editarUser)
+        self.mainWin.btnAtua.clicked.connect(self.atuaNome)
+
+        self.winLogin.btnLogin.clicked.connect(self.cons)
         self.slvBtn = self.winLogin.salvarUser
         self.mainWin.metaLbl.setText(f'Meta: R${self.metaLbl:.2f}') # Setar o texto com a meta dia
-
         #  Executando a Tela de Login
         self.winLogin.show()
         self.app.exec()
+
+    # Login Config
+    def cons(self):
+        # Pega valores do campo de texto
+        self.user = self.winLogin.mat.text() 
+        self.pasw = self.winLogin.pas.text()
+
+        # Try Login
+        try:
+            linkc = f"https://dados-9be06-default-rtdb.firebaseio.com/users/{self.user}/.json"
+            r = rq.get(linkc)
+            dados = r.json()
+            for d in dados:
+                key = d
+            self.dados = dados[key]
+            senha = self.dados['senha']
+            self.nome = self.dados['nome']
+
+            if self.pasw == senha:
+                self.msg(self.winLogin, f'Seja bem vindo {self.nome}')
+                self.mainWin.lblUser.setText(f'{self.nome}')
+                self.winLogin.close()
+                self.mainWin.show()
+            else:
+                self.msg(self.winLogin, 'Senha Incorreta !!')
+        except:
+            self.msg(self.winLogin, 'Usuário não encontrado !!')
+
+    def addUser(self):
+        if self.user != 'admin':
+            self.msg(self.mainWin, 'Função de ADM!!')
+    
+    def atuSenha(self):
+        if self.user != 'admin':
+            self.msg(self.mainWin, 'Função de ADM!!')
+
+    def editarUser(self):
+        if self.user != 'admin':
+            self.msg(self.mainWin, 'Função de ADM!!')
+
+    def atuaNome(self):
+        if self.user != 'admin':
+            self.msg(self.mainWin, 'Função de ADM!!')
 
     # MessageBox 
     def msg(self, win, msg):
@@ -96,37 +146,4 @@ class App():
         self.winLogin.pas.setText('')
         self.mainWin.close()
         self.winLogin.show()
-
-    # Realiza o Login
-    def entrar(self):
-        # Pega valores do campo de texto
-        self.user = self.winLogin.mat.text() 
-        self.pasw = self.winLogin.pas.text()
-
-        # Config. do módulo de Login
-        l = Login()
-        l.matriculaLogin = str(self.user)
-        l.senhaLogin = str(self.pasw)
-
-        # Teste de Rede
-        r = l.resposta
-        if r == 'net':
-            self.msg(self.winLogin, 'Sem conexão com a Internet')
-            exit()
-
-        # Tentativa de Login
-        l.tryLogin()
-        r = l.resposta   
-        if r == 'sim':
-            self.nome = l.nome
-            self.msg(self.winLogin, f'Seja bem vindo {self.nome}')
-            self.mainWin.lblUser.setText(f'{self.nome}')
-            self.winLogin.close()
-            self.mainWin.show()
-        elif r == 'senha':
-            self.msg(self.winLogin, 'Senha Incorreta !!')
-        elif r == 'user':
-            self.msg(self.winLogin, 'Usuário não encontrado !!')
-        else:     
-            self.msg(self.winLogin, 'Erro desconhecido !')
 App()
