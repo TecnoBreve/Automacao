@@ -25,8 +25,8 @@ class App():
 
         # Settings
         self.app = QApplication([])
-        self.winLogin = uic.loadUi('uic\\login.ui') # Exporta o design da Login windown 
-        self.mainWin = uic.loadUi('uic\\main.ui') # Exporta o design da Main windown
+        self.winLogin = uic.loadUi('uic//login.ui') # Exporta o design da Login windown 
+        self.mainWin = uic.loadUi('uic//main.ui') # Exporta o design da Main windown
         st() # Setar tema escuro
 
 
